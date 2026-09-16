@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True E-Commerce Profit Margin & ROI Calculator | Shopify & Amazon FBA</title>
+    <meta name="description" content="Calculate your true e-commerce profit margins, break-even ROAS, and net ROI for Shopify and Amazon FBA products instantly. Factor in fees, shipping, ads, and returns.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header AdSense Slot -->
+    <header class="ad-container leaderboard-ad">
+        <span class="ad-label">Advertisement</span>
+        <!-- Insert Google AdSense script here -->
+        <div class="ad-placeholder">Leaderboard Ad Slot (728x90)</div>
+    </header>
+
+    <div class="container">
+        <div class="page-title">
+            <h1>E-Commerce Profit & ROI Calculator</h1>
+            <p>Accurately calculate net profits, platform fees, and break-even metrics for Shopify & Amazon FBA.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <!-- Left Column: Inputs -->
+            <div class="card input-card">
+                <h2>Product & Financial Inputs</h2>
+                
+                <div class="form-group">
+                    <label for="platform">Selling Platform</label>
+                    <select id="platform" class="form-control">
+                        <option value="shopify" selected>Shopify (Custom Gateway)</option>
+                        <option value="amazon">Amazon FBA</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sellingPrice">Selling Price ($)</label>
+                        <input type="number" id="sellingPrice" class="form-control" value="49.99" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="cogs">Item Cost (COGS) ($)</label>
+                        <input type="number" id="cogs" class="form-control" value="10.00" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="shippingCost">Shipping to Customer ($)</label>
+                        <input type="number" id="shippingCost" class="form-control" value="4.50" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="prepCost">Inbound / Prep Cost ($)</label>
+                        <input type="number" id="prepCost" class="form-control" value="1.00" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adSpend">Ad Spend per Sale ($)</label>
+                        <input type="number" id="adSpend" class="form-control" value="12.00" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="returnRate">Estimated Return Rate (%)</label>
+                        <input type="number" id="returnRate" class="form-control" value="5" min="0" max="100" step="0.1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="platformFeePercent">Platform Fee (%)</label>
+                        <input type="number" id="platformFeePercent" class="form-control" value="2.9" min="0" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="platformFeeFixed">Fixed Fee ($)</label>
+                        <input type="number" id="platformFeeFixed" class="form-control" value="0.30" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <button id="resetBtn" class="btn-secondary">Reset Defaults</button>
+            </div>
+
+            <!-- Right Column: Sticky Results & Sidebar Ad -->
+            <div class="results-sidebar">
+                <div class="card results-card sticky">
+                    <h2>Financial Breakdown</h2>
+                    
+                    <div class="metric-highlight profit-box">
+                        <span class="metric-label">Net Profit per Unit</span>
+                        <span id="netProfit" class="metric-value">$18.59</span>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">Profit Margin</span>
+                            <span id="netMargin" class="metric-val">37.19%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">True ROI</span>
+                            <span id="trueRoi" class="metric-val">122.3%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Break-Even ROAS</span>
+                            <span id="breakEvenRoas" class="metric-val">2.68x</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Total Fees & Costs</span>
+                            <span id="totalCosts" class="metric-val">$31.40</span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-list">
+                        <h3>Cost & Fee Details</h3>
+                        <div class="breakdown-row">
+                            <span>COGS + Prep:</span>
+                            <span id="valCogsPrep">$11.00</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Platform / Gateway Fees:</span>
+                            <span id="valPlatformFee">$1.75</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Fulfillment & Shipping:</span>
+                            <span id="valShipping">$4.50</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Advertising Spend:</span>
+                            <span id="valAdSpend">$12.00</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Return Processing Cost:</span>
+                            <span id="valReturnCost">$2.15</span>
+                        </div>
+                    </div>
+
+                    <button id="copyBtn" class="btn-primary">Copy Summary Report</button>
+                </div>
+
+                <!-- Sidebar/In-feed AdSense Slot -->
+                <div class="ad-container sidebar-ad">
+                    <span class="ad-label">Advertisement</span>
+                    <!-- Insert Google AdSense script here -->
+                    <div class="ad-placeholder">In-Feed / Rectangle Ad Slot (300x250)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer AdSense Slot -->
+    <footer class="ad-container footer-ad">
+        <span class="ad-label">Advertisement</span>
+        <!-- Insert Google AdSense script here -->
+        <div class="ad-placeholder">Footer Leaderboard Ad Slot (728x90)</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
